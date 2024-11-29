@@ -1,0 +1,49 @@
+@startuml
+
+entity "User" as e1 {
+  +id: string 
+  --
+  name : string
+  password: string 
+  role : string 
+}
+
+entity "UserProject" as e2 {
+  +id: string 
+  --
+  MemberID : string
+  TaskID: string
+  ProjectID : string
+}
+
+entity "Project" as e3 {
+  +id: string 
+  --
+  Description: string
+  ProjectType : string
+  NumberOfMember : int
+  AdminID :  string
+}
+
+entity "Tasks" as e4 {
+  +id: string 
+  --
+  Description: string
+  CreateBy: string
+  AssignTo: string 
+  ExpirationDate:  date
+  CreationDate : date
+  CreatorID  : string
+  OwnerID  : string 
+}
+
+e1 ||--o{ e2 : "member of "
+e1 ||--o{ e3 : "Admin of"
+e3 ||--o{ e4 : "have" 
+
+e1 ||--o{ e4 : "own"  
+e1 ||--o{ e4 : "created"  
+e3 ||--o{ e2 : "include"
+e4 ||-o{ e4  : "SubTasks"
+
+@enduml
