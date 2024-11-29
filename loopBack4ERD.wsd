@@ -3,47 +3,51 @@
 entity "User" as e1 {
   +id: string 
   --
-  name : string
+  name: string
   password: string 
-  role : string 
+  userName: string 
+  email: string 
+  creationDate: date
 }
 
 entity "UserProject" as e2 {
-  +id: string 
+  +id(userID, adminID): string 
   --
-  MemberID : string
-  TaskID: string
-  ProjectID : string
+  roles: string 
+  joinDate: date 
 }
 
 entity "Project" as e3 {
   +id: string 
   --
-  Description: string
-  ProjectType : string
-  NumberOfMember : int
-  AdminID :  string
+  description: string
+  projectType: string
+  numberOfMember: int
+  creatorID: string
+  startDate: date
+  endDate: date 
 }
 
 entity "Tasks" as e4 {
   +id: string 
   --
-  Description: string
-  CreateBy: string
-  AssignTo: string 
-  ExpirationDate:  date
-  CreationDate : date
-  CreatorID  : string
-  OwnerID  : string 
+  description: string
+  createBy: string
+  assignTo: string 
+  creationDate: date
+  creatorID: string
+  ownerID: string 
+  startDate: date    
+  endDate: date  
 }
 
 e1 ||--o{ e2 : "member of "
-e1 ||--o{ e3 : "Admin of"
+e1 ||--o{ e3 : "creator of"
 e3 ||--o{ e4 : "have" 
 
 e1 ||--o{ e4 : "own"  
 e1 ||--o{ e4 : "created"  
 e3 ||--o{ e2 : "include"
-e4 ||-o{ e4  : "SubTasks"
+e4 ||-o{ e4 : "subTasks"
 
 @enduml
