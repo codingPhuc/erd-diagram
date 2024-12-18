@@ -31,9 +31,10 @@ entity "Project" as e3 {
 entity "Tasks" as e4 {
   +id: string 
   --
+  mainTaskId: string
   description: string
   createBy: string
-  assignTo: string 
+  assignToUserId: string 
   creationDate: date
   creatorID: string
   ownerID: string 
@@ -49,5 +50,7 @@ e1 ||--o{ e4 : "own"
 e1 ||--o{ e4 : "created"  
 e3 ||--o{ e2 : "include"
 e4 ||-o{ e4 : "subTasks"
+e4 ||-o{ e1 : "assign"
+
 
 @enduml
